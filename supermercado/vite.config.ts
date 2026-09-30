@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default mergeConfig(
   defineConfig({
     plugins: [react()],
-    base: '/supermercado-react/',
+    base: process.env.NODE_ENV === 'production' ? '/supermercado-react/' : '/',
   }),
   defineVitestConfig({
     test: {
