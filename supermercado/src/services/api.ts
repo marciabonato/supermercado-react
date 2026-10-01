@@ -32,8 +32,9 @@ api.interceptors.response.use(
       (error.response.status === 401 || error.response.status === 403)
     ) {
       localStorage.removeItem("token");
-      if (window.location.pathname !== "/login") {
-        window.location.href = "/login";
+      const loginPath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/login`;
+      if (!window.location.pathname.endsWith("/login")) {
+        window.location.href = loginPath;
       }
     }
 

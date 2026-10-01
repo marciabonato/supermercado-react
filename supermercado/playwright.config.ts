@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: "html",
   globalSetup: "./scripts/reset-db.js",
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: "http://localhost:5174",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -27,8 +27,8 @@ export default defineConfig({
       timeout: 120 * 1000,
     },
     {
-      command: "npm run dev",
-      url: "http://localhost:5173",
+      command: "yarn dev --port 5174",
+      url: "http://localhost:5174",
       reuseExistingServer: !process.env.CI,
       env: {
         VITE_API_URL: "http://localhost:3000",

@@ -4,6 +4,6 @@
 {"$$indexCreated":{"fieldName":"nome","unique":false,"sparse":true}}
 {"$$indexCreated":{"fieldName":"preco","unique":false,"sparse":false}}
 {"$$indexCreated":{"fieldName":"quantidade","unique":false,"sparse":false}}
-{"nome":"Monitor Gaming 144Hz","preco":1250,"descricao":"Monitor curvo alta performance","quantidade":15,"_id":"uc2I096MeLU7CW5c"}
+{"nome":"Monitor Gaming 144Hz","preco":1250,"descricao":"Monitor curvo alta performance","quantidade":15,"_id":"bCcNNp4V7r7gv9dI"}
 {"nome":"Samsung 60 polegadas","preco":5240,"descricao":"TV Smart 4K UHD 60 polegadas","quantidade":49977,"_id":"K6leHdftCeOJj8BJ"}
 {"$$deleted":true,"_id":"qNPfmOebx4sLNfUy"}
