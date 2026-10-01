@@ -14,23 +14,39 @@ test.describe("Fluxo de Gestão de Produtos (CRUD e Formulários)", () => {
     await page.goto("/app/produtos");
 
     // Asserções visuais da página de catálogo
-    await expect(page.getByRole("heading", { name: "Gestão de Produtos" })).toBeVisible();
-    await expect(page.getByRole("table").getByText("Logitech MX Vertical")).toBeVisible();
-    await expect(page.getByRole("table").getByText("Samsung 60 polegadas")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Gestão de Produtos" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("table").getByText("Logitech MX Vertical"),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("table").getByText("Samsung 60 polegadas"),
+    ).toBeVisible();
   });
 
-  test("deve realizar o cadastro de um novo produto com sucesso", async ({ page }) => {
+  test("deve realizar o cadastro de um novo produto com sucesso", async ({
+    page,
+  }) => {
     await page.goto("/app/produtos");
 
     // Clica para abrir o formulário de cadastro
     await page.getByRole("link", { name: "Novo Produto" }).click();
     await expect(page).toHaveURL("/app/produtos/novo");
-    await expect(page.getByRole("heading", { name: "Cadastrar Produto" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Cadastrar Produto" }),
+    ).toBeVisible();
 
     // Preenche os campos do formulário
-    await page.fill('input[placeholder="Ex: Teclado Mecânico"]', "Monitor Gaming 144Hz");
+    await page.fill(
+      'input[placeholder="Ex: Teclado Mecânico"]',
+      "Monitor Gaming 144Hz",
+    );
     await page.fill('input[placeholder="0.00"]', "1250");
-    await page.fill('textarea[placeholder="Descrição detalhada do produto"]', "Monitor curvo alta performance");
+    await page.fill(
+      'textarea[placeholder="Descrição detalhada do produto"]',
+      "Monitor curvo alta performance",
+    );
     await page.fill('input[placeholder="0"]', "15");
 
     // Submete o formulário
@@ -38,7 +54,9 @@ test.describe("Fluxo de Gestão de Produtos (CRUD e Formulários)", () => {
 
     // Valida redirecionamento e notificação de sucesso na lista
     await expect(page).toHaveURL("/app/produtos");
-    await expect(page.getByRole("table").getByText("Monitor Gaming 144Hz")).toBeVisible();
+    await expect(
+      page.getByRole("table").getByText("Monitor Gaming 144Hz"),
+    ).toBeVisible();
   });
 
   test("deve visualizar os detalhes de um produto", async ({ page }) => {
@@ -50,11 +68,15 @@ test.describe("Fluxo de Gestão de Produtos (CRUD e Formulários)", () => {
 
     // Valida que a rota mudou para os detalhes e os dados estão visíveis
     await expect(page).toHaveURL(/\/app\/produtos\/[a-zA-Z0-9]+/);
-    await expect(page.getByRole("heading", { name: "Logitech MX Vertical" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Logitech MX Vertical" }),
+    ).toBeVisible();
     await expect(page.getByText("Mouse").first()).toBeVisible();
   });
 
-  test("deve editar as informações de um produto existente", async ({ page }) => {
+  test("deve editar as informações de um produto existente", async ({
+    page,
+  }) => {
     await page.goto("/app/produtos");
 
     // Clica no botão Editar do produto "Samsung 60 polegadas"
@@ -62,18 +84,28 @@ test.describe("Fluxo de Gestão de Produtos (CRUD e Formulários)", () => {
     await produtoRow.getByRole("link", { name: "Editar" }).click();
 
     await expect(page).toHaveURL(/\/app\/produtos\/[a-zA-Z0-9]+\/editar/);
-    await expect(page.getByRole("heading", { name: "Editar Produto" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Editar Produto" }),
+    ).toBeVisible();
 
     // Altera a descrição e submete
-    await page.fill('textarea[placeholder="Descrição detalhada do produto"]', "TV Smart 4K UHD 60 polegadas");
+    await page.fill(
+      'textarea[placeholder="Descrição detalhada do produto"]',
+      "TV Smart 4K UHD 60 polegadas",
+    );
     await page.getByRole("button", { name: "Salvar Alterações" }).click();
 
     // Valida retorno para a lista
     await expect(page).toHaveURL("/app/produtos");
-    await expect(page.getByText("TV Smart 4K UHD 60 polegadas")).toBeVisible();
+    // Alternativa para a linha 73 (mais robusta):
+    await expect(
+      page.getByRole("table").getByText("TV Smart 4K UHD 60 polegadas"),
+    ).toBeVisible();
   });
 
-  test("deve excluir um produto do catálogo e confirmar a remoção", async ({ page }) => {
+  test("deve excluir um produto do catálogo e confirmar a remoção", async ({
+    page,
+  }) => {
     await page.goto("/app/produtos");
 
     // Identifica a linha do produto "Tes" para exclusão
